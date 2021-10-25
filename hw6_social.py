@@ -16,7 +16,8 @@ nltk.download('vader_lexicon', quiet=True)
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
-endChars = [ " ", "\n", "#", ".", ",", "?", "!", ":", ";", ")" ]
+endChars = [ " ",  "\n", "#", ".", ",", "?", "!", ":", ";", ")" ]
+
 
 '''
 makeDataFrame(filename)

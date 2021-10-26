@@ -11,6 +11,7 @@ project = "Social" # don't edit this
 ### PART 1 ###
 
 import pandas as pd
+import re
 import nltk
 nltk.download('vader_lexicon', quiet=True)
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -37,7 +38,14 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    for line in fromString.split("\n"):
+        start=line.find(" from: ")+\
+            len(" from ")
+        line=line[start:]
+        end=line.find("(")
+        line=line[:end]
+        line=line.strip()
+    return line
 
 
 '''
@@ -47,7 +55,14 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    for line in fromString.split("\n"):
+        start=line.find(" (")+\
+            len(" (")
+        line=line[start:]
+        end=line.find("from")
+        line=line[:end] 
+        line=line.strip()
+    return line
 
 
 '''
@@ -57,7 +72,14 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    for line in fromString.split("\n"):
+        start=line.find(" from ")+\
+            len(" from ")
+        line=line[start:]
+        end=line.find(")")
+        line=line[:end]
+        line=line.strip()
+    return line
 
 
 '''
@@ -67,8 +89,7 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
-
+    return re.findall(r"#\w+", message)
 
 '''
 getRegionFromState(stateDf, state)
@@ -267,8 +288,8 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.testMakeDataFrame()
-
+    # test.testMakeDataFrame()
+    test.testFindHashtags()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

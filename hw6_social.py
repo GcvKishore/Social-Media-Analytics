@@ -89,7 +89,7 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return re.findall("#\w+", message)
+    return re.findall("#\w*", message)
 
 '''
 getRegionFromState(stateDf, state)
@@ -100,7 +100,6 @@ Returns: str
 def getRegionFromState(stateDf, state):
     row = stateDf.loc[stateDf['state'] == state,'region'] 
     return (row.values[0])
-
 
 '''
 addColumns(data, stateDf)
@@ -145,7 +144,13 @@ Returns: str
 '''
 def findSentiment(classifier, message):
     score = classifier.polarity_scores(message)['compound']
-    return
+    if score<-0.1:
+        return "negative"
+    elif score>0.1:
+        return "positive"
+    else:
+        return "neutral"
+    
 
 
 '''
@@ -315,7 +320,8 @@ if __name__ == "__main__":
     # test.testMakeDataFrame()
     # test.testFindHashtags()
     # test.testGetRegionFromState()
-    test.testAddColumns()
+    # test.testAddColumns()
+    test.testFindSentiment()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

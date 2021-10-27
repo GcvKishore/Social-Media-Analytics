@@ -152,7 +152,6 @@ def findSentiment(classifier, message):
         return "neutral"
     
 
-
 '''
 addSentimentColumn(data)
 #2 [Check6-2]
@@ -177,7 +176,15 @@ Parameters: dataframe ; str ; str
 Returns: dict mapping strs to ints
 '''
 def getDataCountByState(data, colName, dataToCount):
-    return
+    dict1={}
+    for i,row in data.iterrows():
+        if ((len(colName)==0) and (len(dataToCount)==0) or (row[colName]==dataToCount)):
+                state=row["state"]
+                if state not in dict1:
+                    dict1[state] = 0
+                dict1[state] += 1
+    return dict1
+
 
 
 '''
@@ -328,7 +335,12 @@ if __name__ == "__main__":
     # test.testGetRegionFromState()
     # test.testAddColumns()
     # test.testFindSentiment()
-    test.testAddSentimentColumn()
+    # test.testAddSentimentColumn(df)
+    df = makeDataFrame("data/politicaldata.csv")
+    stateDf = makeDataFrame("data/statemappings.csv")
+    addColumns(df, stateDf)
+    addSentimentColumn(df)
+    test.testGetDataCountByState(df) 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

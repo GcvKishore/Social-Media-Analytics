@@ -234,7 +234,6 @@ def getHashtagRates(data):
             hashtag_dict[tag] += 1
     return (hashtag_dict)
 
-
 '''
 mostCommonHashtags(hashtags, count)
 #6 [Check6-2]
@@ -242,7 +241,12 @@ Parameters: dict mapping strs to ints ; int
 Returns: dict mapping strs to ints
 '''
 def mostCommonHashtags(hashtags, count):
-    return
+    dict1={}
+    hashtags1=sorted(hashtags.items(),key=lambda x:x[1], reverse= True)
+    for i in hashtags1:
+        if count!=len(dict1):
+            dict1[i[0]]=i[1]
+    return dict1
 
 
 '''
@@ -252,6 +256,7 @@ Parameters: dataframe ; str
 Returns: float
 '''
 def getHashtagSentiment(data, hashtag):
+
     return
 
 
@@ -369,7 +374,8 @@ if __name__ == "__main__":
     addColumns(df, stateDf)
     addSentimentColumn(df)
     # test.testGetDataCountByState(df) 
-    test.testGetHashtagRates(df) 
+    # test.testGetHashtagRates(df) 
+    test.testMostCommonHashtags(df)
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()

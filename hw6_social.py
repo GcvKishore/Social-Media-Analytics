@@ -185,8 +185,6 @@ def getDataCountByState(data, colName, dataToCount):
                 dict1[state] += 1
     return dict1
 
-
-
 '''
 getDataForRegion(data, colName)
 #4 [Check6-2]
@@ -194,7 +192,18 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
+    dict_1={}
+    for i,row in data.iterrows():
+        region=row["region"]
+        if region not in dict_1:
+            dict_1[region] = {}
+        if  region  in dict_1:
+            row1=row[colName]
+            if row1 not in dict_1[region]:
+                dict_1[region][row1] = 0
+            dict_1[region][row1] += 1
+    #print("rr",region_count)
+    return dict_1
 
 
 '''
@@ -340,13 +349,14 @@ if __name__ == "__main__":
     stateDf = makeDataFrame("data/statemappings.csv")
     addColumns(df, stateDf)
     addSentimentColumn(df)
-    test.testGetDataCountByState(df) 
+    # test.testGetDataCountByState(df) 
+    test.testGetDataForRegion(df) 
     ## Uncomment these for Week 2 ##
-    """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    test.week2Tests()
-    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()"""
+    # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    # test.week2Tests()
+    # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek2()"""
 
-    ## Uncomment these for Week 3 ##
-    """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()"""
+    # ## Uncomment these for Week 3 ##
+    # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek3()"""

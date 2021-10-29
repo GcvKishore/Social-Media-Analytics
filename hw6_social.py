@@ -230,8 +230,9 @@ def getHashtagRates(data):
         for j in range(len(hash)):
             tag=hash[j]
             if tag not in hashtag_dict:
-                hashtag_dict[tag] =0
-            hashtag_dict[tag] += 1
+                hashtag_dict[tag] =1
+            else:
+                hashtag_dict[tag] += 1
     return (hashtag_dict)
 
 

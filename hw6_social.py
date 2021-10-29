@@ -11,6 +11,7 @@ project = "Social" # don't edit this
 ### PART 1 ###
 
 import pandas as pd
+import re
 import nltk
 nltk.download('vader_lexicon', quiet=True)
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -38,9 +39,9 @@ Returns: str
 '''
 def parseName(fromString):
     for line in fromString.split("\n"):
-        strt=line.find("From:")+\
-            len("From:")
-        line=line[strt:]
+        start=line.find(" from: ")+\
+            len(" from ")
+        line=line[start:]
         end=line.find("(")
         line=line[:end]
         line=line.strip()
@@ -55,11 +56,11 @@ Returns: str
 '''
 def parsePosition(fromString):
     for line in fromString.split("\n"):
-        strt=line.find(" (")+\
+        start=line.find(" (")+\
             len(" (")
-        line=line[strt:]
+        line=line[start:]
         end=line.find("from")
-        line=line[:end]
+        line=line[:end] 
         line=line.strip()
     return line
 
@@ -72,9 +73,9 @@ Returns: str
 '''
 def parseState(fromString):
     for line in fromString.split("\n"):
-        strt=line.find(" from ")+\
+        start=line.find(" from ")+\
             len(" from ")
-        line=line[strt:]
+        line=line[start:]
         end=line.find(")")
         line=line[:end]
         line=line.strip()
@@ -88,8 +89,7 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
-
+    return re.findall("#\w+", message)
 
 '''
 getRegionFromState(stateDf, state)
@@ -98,7 +98,8 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    return
+    row = stateDf.loc[stateDf['state'] == state,'region'] 
+    return (row.values[0])
 
 
 '''
@@ -289,9 +290,8 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.testMakeDataFrame()
-    # test.testParseName()
-    # test.testParsePosition() 
-    test.testParseState()
+    # test.testFindHashtags()
+    test.testGetRegionFromState()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

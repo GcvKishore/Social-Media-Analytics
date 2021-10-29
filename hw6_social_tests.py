@@ -82,7 +82,7 @@ def testAddColumns():
     print("... done!")
 
 def week1Tests():
-    testMakeDataFrame()
+    testMakeDataFrame() 
     testParseName()
     testParsePosition()
     testParseState()

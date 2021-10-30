@@ -278,7 +278,16 @@ Returns: None
 '''
 def graphStateCounts(stateCounts, title):
     import matplotlib.pyplot as plt
-    
+    xcoord=[i for i in stateCounts]
+    w=0.8
+    ycoord=[stateCounts[i] for i in stateCounts]
+    for index in range(len(ycoord)):
+        plt.bar(xcoord[index],ycoord[index],width=w)
+    plt.xticks(ticks=list(range(len(xcoord))),label=xcoord,rotation="vertical")
+    plt.title("StateCount")
+    plt.xlabel("State")
+    plt.ylabel("Count")
+    plt.show()
     return
 
 
@@ -378,20 +387,20 @@ if __name__ == "__main__":
     # test.testAddColumns()
     # test.testFindSentiment()
     # test.testAddSentimentColumn(df)
-    df = makeDataFrame("data/politicaldata.csv")
-    stateDf = makeDataFrame("data/statemappings.csv")
-    addColumns(df, stateDf)
-    addSentimentColumn(df)
-    # test.testGetDataCountByState(df) 
-    # test.testGetHashtagRates(df) 
-    # test.testMostCommonHashtags(df)
-    test.testGetHashtagSentiment(df) 
+    # df = makeDataFrame("data/politicaldata.csv")
+    # stateDf = makeDataFrame("data/statemappings.csv")
+    # addColumns(df, stateDf)
+    # addSentimentColumn(df)
+    # # test.testGetDataCountByState(df) 
+    # # test.testGetHashtagRates(df) 
+    # # test.testMostCommonHashtags(df)
+    # test.testGetHashtagSentiment(df) 
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()
     # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek2()"""
 
-    # ## Uncomment these for Week 3 ##
-    # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek3()"""
+    ## Uncomment these for Week 3 ##
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()
